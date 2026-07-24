@@ -156,11 +156,10 @@
             min-height: 600px;
             display: flex;
             align-items: center;
-            /* Subtle nature-inspired gradient */
             background: linear-gradient(135deg, var(--color-dark-blue) 0%, #1e293b 60%, var(--color-green) 100%);
             color: var(--color-white);
             text-align: center;
-            padding-top: 80px; /* Offset for navbar */
+            padding-top: 80px; 
         }
 
         .hero-content {
@@ -228,7 +227,7 @@
         }
 
         /* =========================================
-           About Section
+           About Section (Home Preview)
            ========================================= */
         .about {
             padding: 6rem 0;
@@ -314,11 +313,30 @@
         }
 
         /* =========================================
+           Penguin Corner
+           ========================================= */
+        .penguin-corner {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            font-size: 3rem;
+            z-index: 9999;
+            cursor: pointer;
+            transition: transform 0.3s ease, filter 0.3s ease;
+            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.2));
+            user-select: none;
+        }
+        
+        .penguin-corner:hover {
+            transform: scale(1.2) translateY(-10px) rotate(10deg);
+        }
+
+        /* =========================================
            Responsive Design
            ========================================= */
         @media (max-width: 768px) {
             .nav-links {
-                display: none; /* Mobile menu placeholder */
+                display: none; 
             }
             
             .hero h1 {
@@ -329,22 +347,28 @@
                 flex-direction: column;
                 align-items: center;
             }
+            
+            .penguin-corner {
+                font-size: 2.5rem;
+                bottom: 15px;
+                left: 15px;
+            }
         }
     </style>
 </head>
 <body>
 
-    <!-- Navigation -->
+    <!-- Navigation (Links updated to point to HTML files) -->
     <header class="navbar">
         <div class="container nav-container">
             <div class="logo">EcoTech<span>2035</span></div>
             <nav>
                 <ul class="nav-links">
-                    <li><a href="#home">Home</a></li>
+                    <li><a href="index.html">Home</a></li>
                     <li><a href="#innovations">Innovations</a></li>
-                    <li><a href="#projects">Projects</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="projects.html">Projects</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
                 </ul>
             </nav>
         </div>
@@ -386,22 +410,15 @@
         </div>
     </section>
 
-    <!-- About Section -->
-    <section id="about" class="about">
-        <div class="container about-content">
-            <h2 class="section-title">About EcoTech 2035</h2>
-            <p>EcoTech 2035 is a global initiative dedicated to accelerating the transition to a sustainable economy. By bridging the gap between cutting-edge technology and environmental stewardship, we empower communities, businesses, and individuals to implement solutions that restore our ecosystems and protect our climate.</p>
-        </div>
-    </section>
-
     <!-- Call to Action -->
     <section id="contact" class="cta">
         <div class="container cta-content">
             <h2>Ready to make an impact?</h2>
             <p>Join thousands of volunteers and innovators working together to heal the planet.</p>
             <div class="cta-buttons">
-                <a href="#" class="btn btn-primary btn-outline">Volunteer Now</a>
-                <a href="#" class="btn btn-primary">Subscribe for Updates</a>
+                <!-- Link points to contact page -->
+                <a href="contact.html" class="btn btn-primary btn-outline">Volunteer Now</a>
+                <a href="contact.html" class="btn btn-primary">Subscribe for Updates</a>
             </div>
         </div>
     </section>
@@ -417,6 +434,9 @@
             <p>&copy; 2026 EcoTech 2035. All rights reserved.</p>
         </div>
     </footer>
+
+    <!-- Penguin in the corner -->
+    <div class="penguin-corner" title="Save the ice!">🐧</div>
 
 </body>
 </html>
