@@ -99,7 +99,7 @@
         .btn {
             display: inline-block;
             padding: 1rem 2.5rem;
-            border-radius: 4px; /* Sci-fi sharp edges */
+            border-radius: 4px; 
             font-weight: 600;
             text-decoration: none;
             transition: var(--transition);
@@ -552,6 +552,8 @@
             position: relative;
             background-size: cover !important;
             background-position: center !important;
+            display: block;
+            text-decoration: none; /* Prevents underlines on links */
         }
 
         .gallery-overlay {
@@ -590,6 +592,7 @@
         .gallery-item:hover p {
             transform: translateY(0);
             opacity: 1;
+            color: var(--color-white); /* Keeps text white on hover */
         }
 
         /* =========================================
@@ -955,7 +958,7 @@
         </div>
     </section>
 
-    <!-- Latest News Section (Updated with REAL external Links) -->
+    <!-- Latest News Section -->
     <section id="news" class="section-padding">
         <div class="container">
             <h2 class="section-title">Latest News</h2>
@@ -985,36 +988,43 @@
         </div>
     </section>
 
-    <!-- Media Gallery Section -->
+    <!-- Media Gallery Section (NOW LINKED TO ACTUAL SIMULATIONS) -->
     <section id="gallery" class="section-padding" style="background: rgba(0,0,0,0.4);">
         <div class="container">
-            <h2 class="section-title">Media Gallery</h2>
+            <h2 class="section-title">Interactive Simulations</h2>
             <div class="gallery-grid">
-                <div class="gallery-item" style="background: url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=800&auto=format&fit=crop');">
+                <!-- 1. NASA 3D Habitat -->
+                <a href="https://mars.nasa.gov/mars2020/spacecraft/rover/" target="_blank" rel="noopener noreferrer" class="gallery-item" style="background: url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=800&auto=format&fit=crop');">
                     <div class="gallery-overlay">
-                        <p>Habitat Prototype Alpha</p>
+                        <p>Explore 3D Spacecraft & Habitats</p>
                     </div>
-                </div>
-                <div class="gallery-item" style="background: url('https://images.unsplash.com/photo-1614729939124-03290b56c9ce?q=80&w=800&auto=format&fit=crop');">
+                </a>
+                <!-- 2. Experience Curiosity Rover Simulation -->
+                <a href="https://eyes.nasa.gov/curiosity/" target="_blank" rel="noopener noreferrer" class="gallery-item" style="background: url('https://images.unsplash.com/photo-1614729939124-03290b56c9ce?q=80&w=800&auto=format&fit=crop');">
                     <div class="gallery-overlay">
-                        <p>Autonomous Rover Simulation</p>
+                        <p>Drive the Rover Simulation</p>
                     </div>
-                </div>
-                <div class="gallery-item" style="background: url('https://images.unsplash.com/photo-1541185933-ef5d8ed016c2?q=80&w=800&auto=format&fit=crop');">
+                </a>
+                <!-- 3. SpaceX Starship Interactive -->
+                <a href="https://www.spacex.com/vehicles/starship/" target="_blank" rel="noopener noreferrer" class="gallery-item" style="background: url('https://images.unsplash.com/photo-1541185933-ef5d8ed016c2?q=80&w=800&auto=format&fit=crop');">
                     <div class="gallery-overlay">
-                        <p>Heavy-Lift Rocket Assembly</p>
+                        <p>Heavy-Lift Starship Overview</p>
                     </div>
-                </div>
-                <div class="gallery-item" style="background: url('https://images.unsplash.com/photo-1632395627727-4b76a0ce3455?q=80&w=800&auto=format&fit=crop');">
+                </a>
+                <!-- 4. Mars Trek (Interactive Mars Map) -->
+                <a href="https://trek.nasa.gov/mars/" target="_blank" rel="noopener noreferrer" class="gallery-item" style="background: url('https://images.unsplash.com/photo-1632395627727-4b76a0ce3455?q=80&w=800&auto=format&fit=crop');">
                     <div class="gallery-overlay">
-                        <p>Martian Topography Scan</p>
+                        <p>Interactive Mars Topography Map</p>
                     </div>
-                </div>
+                </a>
             </div>
+            <p style="text-align: center; color: #A0AAB5; margin-top: 1.5rem; font-size: 0.9rem;">
+                * Clicking the images above will open actual interactive 3D simulations provided by NASA and SpaceX in a new tab.
+            </p>
         </div>
     </section>
 
-    <!-- Careers Section (Updated with REAL external links) -->
+    <!-- Careers Section -->
     <section id="careers" class="section-padding">
         <div class="container">
             <h2 class="section-title">Careers</h2>
@@ -1091,7 +1101,7 @@
                     <h3>Explore</h3>
                     <ul>
                         <li><a href="#news">Latest News</a></li>
-                        <li><a href="#gallery">Media Gallery</a></li>
+                        <li><a href="#gallery">Simulations</a></li>
                         <li><a href="#careers">Careers</a></li>
                     </ul>
                 </div>
