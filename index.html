@@ -1,20 +1,591 @@
-<html>
-<title>
-Mars Mission 2040
-</title>
+<!DOCTYPE html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mars Mission 2040 | Humanity's First Home on Mars</title>
+    <!-- Using Google Fonts for a futuristic look -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        /* =========================================
+           CSS Variables & Resets
+           ========================================= */
+        :root {
+            --color-mars: #E55934;
+            --color-mars-dark: #C9421C;
+            --color-space: #0B0D17;
+            --color-stars: #1B2136;
+            --color-text: #E0E6ED;
+            --color-white: #FFFFFF;
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            
+            --transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--color-text);
+            background-color: var(--color-space);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, .logo {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--color-white);
+            line-height: 1.2;
+            letter-spacing: 1px;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            font-weight: 700;
+            color: var(--color-mars);
+            text-transform: uppercase;
+        }
+
+        /* =========================================
+           Animated Starry Background
+           ========================================= */
+        .stars-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+            background: radial-gradient(circle at bottom, #1B2136 0%, #0B0D17 100%);
+            overflow: hidden;
+        }
+
+        .stars {
+            width: 2px;
+            height: 2px;
+            background: transparent;
+            box-shadow: 174px 21px #FFF, 292px 992px #FFF, 342px 34px #FFF, 84px 934px #FFF, 
+                        752px 394px #FFF, 342px 722px #FFF, 54px 194px #FFF, 621px 822px #FFF, 
+                        824px 14px #FFF, 934px 994px #FFF, 120px 420px #FFF, 800px 300px #FFF;
+            animation: moveUp 50s linear infinite;
+        }
+
+        @keyframes moveUp {
+            from { transform: translateY(0); }
+            to { transform: translateY(-1000px); }
+        }
+
+        /* =========================================
+           Buttons
+           ========================================= */
+        .btn {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            border-radius: 4px; /* Sci-fi sharp edges */
+            font-weight: 600;
+            text-decoration: none;
+            transition: var(--transition);
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            border: 2px solid transparent;
+            font-size: 0.9rem;
+        }
+
+        .btn-primary {
+            background-color: var(--color-mars);
+            color: var(--color-white);
+            box-shadow: 0 0 15px rgba(229, 89, 52, 0.4);
+        }
+
+        .btn-primary:hover {
+            background-color: transparent;
+            border-color: var(--color-mars);
+            color: var(--color-mars);
+            transform: translateY(-3px);
+            box-shadow: 0 0 25px rgba(229, 89, 52, 0.8);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border-color: var(--color-white);
+            color: var(--color-white);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--color-white);
+            color: var(--color-space);
+        }
+
+        /* =========================================
+           Navigation
+           ========================================= */
+        .navbar {
+            background-color: rgba(11, 13, 23, 0.85);
+            backdrop-filter: blur(15px);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 0;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 900;
+            text-transform: uppercase;
+        }
+
+        .logo span {
+            color: var(--color-mars);
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--color-text);
+            font-weight: 600;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--color-mars);
+            text-shadow: 0 0 10px rgba(229, 89, 52, 0.5);
+        }
+
+        /* =========================================
+           Hero Section
+           ========================================= */
+        .hero {
+            height: 100vh;
+            min-height: 700px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding-top: 80px; 
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 900px;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 4.5rem;
+            margin-bottom: 1.5rem;
+            text-shadow: 0 4px 15px rgba(0,0,0,0.5);
+        }
+
+        .hero .highlight {
+            color: var(--color-mars);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 3rem;
+            color: #B0B8C1;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+        }
+
+        /* =========================================
+           Statistics Banner (Bonus)
+           ========================================= */
+        .stats-banner {
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(10px);
+            border-top: 1px solid var(--color-mars);
+            border-bottom: 1px solid var(--color-mars);
+            padding: 2rem 0;
+            margin-top: -5px; /* Pull up to bottom of hero */
+        }
+
+        .stats-grid {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 2rem;
+            text-align: center;
+        }
+
+        .stat-item {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .stat-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-value {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            color: var(--color-white);
+            font-weight: 700;
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            color: var(--color-mars);
+            letter-spacing: 1px;
+        }
+
+        /* =========================================
+           Sections Layout (About & Tech)
+           ========================================= */
+        .section-padding {
+            padding: 6rem 0;
+        }
+
+        .about-content {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .about-content p {
+            font-size: 1.15rem;
+            color: #B0B8C1;
+        }
+
+        /* =========================================
+           Planet Cards (Goals & Crew)
+           ========================================= */
+        .grid-3, .grid-4 {
+            display: grid;
+            gap: 2rem;
+        }
+        .grid-3 { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+        .grid-4 { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
+
+        .planet-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 3rem 2rem;
+            text-align: center;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Hover Effect for Planet Cards */
+        .planet-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(229,89,52,0.1) 0%, transparent 60%);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            z-index: 0;
+        }
+
+        .planet-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--color-mars);
+            box-shadow: 0 10px 30px rgba(229, 89, 52, 0.2);
+        }
+
+        .planet-card:hover::before {
+            opacity: 1;
+        }
+
+        .planet-card > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        .planet-card .icon {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            display: inline-block;
+            background: rgba(0,0,0,0.3);
+            padding: 20px;
+            border-radius: 50%;
+            border: 1px solid var(--color-mars);
+        }
+
+        .planet-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+        }
+
+        .planet-card p {
+            font-size: 0.95rem;
+            color: #A0AAB5;
+        }
+
+        /* =========================================
+           Timeline Section
+           ========================================= */
+        .timeline {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 2px;
+            background-color: var(--color-mars);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -1px;
+        }
+
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            background-color: inherit;
+            width: 50%;
+        }
+
+        .timeline-item.left { left: 0; text-align: right; }
+        .timeline-item.right { left: 50%; text-align: left; }
+
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            right: -10px;
+            background-color: var(--color-space);
+            border: 4px solid var(--color-mars);
+            top: 15px;
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        .timeline-item.right::after {
+            left: -10px;
+        }
+
+        .timeline-content {
+            padding: 1.5rem;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 8px;
+        }
+
+        .timeline-year {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            color: var(--color-mars);
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        /* =========================================
+           Info Grid (Facts & Tech)
+           ========================================= */
+        .info-lists {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4rem;
+        }
+        
+        .info-col {
+            flex: 1;
+            min-width: 300px;
+            background: var(--glass-bg);
+            padding: 3rem;
+            border-radius: 16px;
+            border: 1px solid var(--glass-border);
+        }
+
+        .info-col h3 {
+            color: var(--color-mars);
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+        }
+
+        .info-col ul {
+            list-style: none;
+        }
+
+        .info-col ul li {
+            margin-bottom: 1rem;
+            padding-left: 1.5rem;
+            position: relative;
+            color: #B0B8C1;
+        }
+
+        .info-col ul li::before {
+            content: '▹';
+            color: var(--color-mars);
+            position: absolute;
+            left: 0;
+            font-size: 1.2rem;
+            top: -2px;
+        }
+
+        /* =========================================
+           Call to Action Section
+           ========================================= */
+        .cta {
+            background: linear-gradient(0deg, rgba(229,89,52,0.1) 0%, transparent 100%), 
+                        url('data:image/svg+xml;utf8,<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="40" stroke="rgba(229,89,52,0.2)" stroke-width="2" fill="none"/></svg>') center/cover;
+            padding: 8rem 0;
+            text-align: center;
+            border-top: 1px solid var(--glass-border);
+        }
+
+        .cta h2 {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .cta p {
+            font-size: 1.2rem;
+            margin-bottom: 3rem;
+            color: #B0B8C1;
+            max-width: 600px;
+            margin-left: auto; margin-right: auto;
+        }
+
+        .rocket-animation {
+            font-size: 4rem;
+            display: inline-block;
+            margin-bottom: 1rem;
+            animation: floatRocket 3s ease-in-out infinite;
+        }
+
+        @keyframes floatRocket {
+            0%, 100% { transform: translateY(0) rotate(45deg); }
+            50% { transform: translateY(-15px) rotate(45deg); }
+        }
+
+        /* =========================================
+           Footer
+           ========================================= */
+        .footer {
+            background-color: #05060A;
+            padding: 4rem 0 2rem;
+            border-top: 1px solid var(--color-mars);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer h3 {
+            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
+        }
+
+        .footer ul {
+            list-style: none;
+        }
+
+        .footer ul li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer a {
+            color: #A0AAB5;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer a:hover {
+            color: var(--color-mars);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #707A8A;
+            font-size: 0.9rem;
+        }
+
+        /* =========================================
+           Responsive Design
+           ========================================= */
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .hero h1 { font-size: 2.5rem; }
+            .hero-buttons { flex-direction: column; }
+            .timeline::after { left: 31px; }
+            .timeline-item { width: 100%; padding-left: 70px; padding-right: 25px; }
+            .timeline-item.left, .timeline-item.right { left: 0; text-align: left; }
+            .timeline-item.left::after, .timeline-item.right::after { left: 21px; }
+            .stats-grid { flex-direction: column; gap: 1.5rem; }
+        }
+    </style>
 </head>
 <body>
+
+    <!-- Animated Stars Background -->
+    <div class="stars-container">
+        <div class="stars"></div>
+    </div>
 
     <!-- Navigation -->
     <header class="navbar">
         <div class="container nav-container">
-            <div class="logo">EcoTech<span>2035</span></div>
+            <div class="logo">MarsMission<span>2040</span></div>
             <nav>
                 <ul class="nav-links">
                     <li><a href="#home">Home</a></li>
-                    <li><a href="mission.html">Explore The Mission</a></li>
-                    <li><a href="journey.html">Join the Journey</a></li>
+                    <li><a href="#mission">Mission</a></li>
+                    <li><a href="#crew">Crew</a></li>
+                    <li><a href="#tech">Technology</a></li>
+                    <li><a href="#news">News</a></li>
+                    <li><a href="#contact">Contact</a></li>
                 </ul>
             </nav>
         </div>
@@ -23,70 +594,222 @@ Mars Mission 2040
     <!-- Hero Section -->
     <section id="home" class="hero">
         <div class="container hero-content">
-            <h1>Building Humanity's <span class="highlight">First Home on Mars</span></h1>
+            <h1>Building Humanity's <br><span class="highlight">First Home on Mars</span></h1>
             <p>Join the world's most ambitious space mission as scientists, engineers, and explorers work together to establish a sustainable human settlement on the Red Planet.</p>
+            <div class="hero-buttons">
+                <a href="#mission" class="btn btn-primary">Explore the Mission</a>
+                <a href="#contact" class="btn btn-outline">Join the Journey</a>
+            </div>
         </div>
     </section>
 
-    <!-- Features Section -->
-    <section class="features bg-light">
-        <div class="container">
-            <h2 class="section-title">Mission Goals</h2>
-            <div class="features-grid">
-                <!-- Card 1 -->
-                <div class="card">
-                    <div class="icon">🛰️</div>
-                    <h3> Safe Transportation</h3>
-                    <p>Harnessing the power of the sun with next-generation photovoltaic cells to power cities cleanly and efficiently.</p>
-                </div>
-                <!-- Card 2 -->
-                <div class="card">
-                    <div class="icon">♻️</div>
-                    <h3>Smart Recycling</h3>
-                    <p>AI-driven sorting facilities that maximize material recovery and push us closer to a true zero-waste economy.</p>
-                </div>
-                <!-- Card 3 -->
-                <div class="card">
-                    <div class="icon">🚲</div>
-                    <h3>Green Transportation</h3>
-                    <p>Zero-emission transit networks and EV infrastructure that keep our world moving without leaving a footprint.</p>
-                </div>
+    <!-- Bonus: Mission Statistics -->
+    <section class="stats-banner">
+        <div class="container stats-grid">
+            <div class="stat-item">
+                <div class="stat-icon">🌍</div>
+                <div class="stat-value">225M km</div>
+                <div class="stat-label">Avg Distance</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-icon">🚀</div>
+                <div class="stat-value">~7 Months</div>
+                <div class="stat-label">Mission Duration</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-icon">👨‍🚀</div>
+                <div class="stat-value">6</div>
+                <div class="stat-label">Crew Size</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-icon">🌡️</div>
+                <div class="stat-value">−63°C</div>
+                <div class="stat-label">Avg Temp</div>
             </div>
         </div>
     </section>
 
     <!-- About Section -->
-    <section id="about" class="about">
+    <section id="mission" class="section-padding">
         <div class="container about-content">
-            <h2 class="section-title">About EcoTech 2035</h2>
-            <p>EcoTech 2035 is a global initiative dedicated to accelerating the transition to a sustainable economy. By bridging the gap between cutting-edge technology and environmental stewardship, we empower communities, businesses, and individuals to implement solutions that restore our ecosystems and protect our climate.</p>
+            <h2 class="section-title">About Us</h2>
+            <p>Mars Mission 2040 is an international initiative focused on sending humans to Mars and creating a permanent, self-sustaining colony. The mission combines cutting-edge technology, scientific research, and global collaboration to prepare humanity for life beyond Earth.</p>
+        </div>
+    </section>
+
+    <!-- Mission Goals (Planet Cards) -->
+    <section class="section-padding" style="padding-top: 0;">
+        <div class="container">
+            <h2 class="section-title">Mission Goals</h2>
+            <div class="grid-3">
+                <div class="planet-card">
+                    <div class="icon">🛰️</div>
+                    <h3>Safe Transportation</h3>
+                    <p>Develop reusable spacecraft capable of transporting astronauts and supplies safely between Earth and Mars.</p>
+                </div>
+                <div class="planet-card">
+                    <div class="icon">🏠</div>
+                    <h3>Sustainable Habitats</h3>
+                    <p>Construct habitats that protect astronauts from harsh weather, radiation, and extreme temperatures while producing food, water, and oxygen.</p>
+                </div>
+                <div class="planet-card">
+                    <div class="icon">🔬</div>
+                    <h3>Scientific Research</h3>
+                    <p>Study Mars' geology, climate, and potential signs of ancient life to expand our understanding of the Solar System.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mission Timeline -->
+    <section id="tech" class="section-padding">
+        <div class="container">
+            <h2 class="section-title">Mission Timeline</h2>
+            <div class="timeline">
+                <div class="timeline-item left">
+                    <div class="timeline-content">
+                        <div class="timeline-year">2028</div>
+                        <p>Prototype spacecraft testing begins in Low Earth Orbit.</p>
+                    </div>
+                </div>
+                <div class="timeline-item right">
+                    <div class="timeline-content">
+                        <div class="timeline-year">2032</div>
+                        <p>Cargo missions deliver vital supplies, rovers, and infrastructure equipment.</p>
+                    </div>
+                </div>
+                <div class="timeline-item left">
+                    <div class="timeline-content">
+                        <div class="timeline-year">2036</div>
+                        <p>Autonomous construction robots begin building 3D printed habitats.</p>
+                    </div>
+                </div>
+                <div class="timeline-item right">
+                    <div class="timeline-content">
+                        <div class="timeline-year">2040</div>
+                        <p>First astronauts arrive and officially establish the Mars colony.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Meet The Crew -->
+    <section id="crew" class="section-padding">
+        <div class="container">
+            <h2 class="section-title">Meet the Crew</h2>
+            <div class="grid-4">
+                <div class="planet-card" style="padding: 2rem 1.5rem;">
+                    <div class="icon" style="font-size: 2.5rem;">👨‍🚀</div>
+                    <h3>Commander</h3>
+                    <p>Leads the mission, pilots the spacecraft, and oversees all ground operations.</p>
+                </div>
+                <div class="planet-card" style="padding: 2rem 1.5rem;">
+                    <div class="icon" style="font-size: 2.5rem;">⚙️</div>
+                    <h3>Flight Engineer</h3>
+                    <p>Maintains spacecraft life support systems and habitat equipment.</p>
+                </div>
+                <div class="planet-card" style="padding: 2rem 1.5rem;">
+                    <div class="icon" style="font-size: 2.5rem;">🧪</div>
+                    <h3>Scientist</h3>
+                    <p>Conducts geological, biological, and atmospheric research on the surface.</p>
+                </div>
+                <div class="planet-card" style="padding: 2rem 1.5rem;">
+                    <div class="icon" style="font-size: 2.5rem;">⚕️</div>
+                    <h3>Medical Officer</h3>
+                    <p>Ensures optimal crew health, nutrition, and emergency medical care.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Info Grid (Why Mars / Tech / Facts) -->
+    <section class="section-padding">
+        <div class="container info-lists">
+            <div class="info-col">
+                <h3>Why Mars?</h3>
+                <ul>
+                    <li>Similar day length to Earth (24.6 hours)</li>
+                    <li>Contains water ice beneath the surface</li>
+                    <li>Valuable scientific discoveries</li>
+                    <li>Stepping stone for deeper space exploration</li>
+                    <li>Potential future home for humanity</li>
+                </ul>
+            </div>
+            
+            <div class="info-col">
+                <h3>Key Technologies</h3>
+                <ul>
+                    <li>Reusable Heavy-Lift Rockets</li>
+                    <li>Artificial Intelligence & Robotics</li>
+                    <li>Advanced Solar Power Systems</li>
+                    <li>Water Extraction Technology</li>
+                    <li>3D Printed Habitats from Martian Soil</li>
+                    <li>Autonomous Exploration Rovers</li>
+                </ul>
+            </div>
+            
+            <div class="info-col">
+                <h3>Interesting Facts</h3>
+                <ul>
+                    <li>Mars is the fourth planet from the Sun.</li>
+                    <li>It has two moons: Phobos and Deimos.</li>
+                    <li>Gravity on Mars is about 38% of Earth's.</li>
+                    <li>Home to Olympus Mons, the tallest volcano in the Solar System.</li>
+                    <li>Valles Marineris canyon stretches over 4,000 km.</li>
+                </ul>
+            </div>
         </div>
     </section>
 
     <!-- Call to Action -->
     <section id="contact" class="cta">
-        <div class="container cta-content">
-            <h2>Ready to make an impact?</h2>
-            <p>Join thousands of volunteers and innovators working together to heal the planet.</p>
-            <div class="cta-buttons">
-                <a href="#" class="btn btn-primary btn-outline">Volunteer Now</a>
-                <a href="#" class="btn btn-primary">Subscribe for Updates</a>
-            </div>
+        <div class="container">
+            <div class="rocket-animation">🚀</div>
+            <h2>Ready to Shape the Future?</h2>
+            <p>Support the mission, explore the latest discoveries, and become part of humanity's greatest adventure.</p>
+            <a href="mailto:info@marsmission2040.com" class="btn btn-primary">Join the Mission</a>
         </div>
     </section>
 
     <!-- Footer -->
     <footer class="footer">
-        <div class="container footer-content">
-            <div class="social-links">
-                <a href="#">Twitter</a>
-                <a href="#">LinkedIn</a>
-                <a href="#">Instagram</a>
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <div class="logo" style="margin-bottom: 1rem; font-size: 1.2rem;">MarsMission<span style="color:var(--color-mars)">2040</span></div>
+                    <p style="color: #707A8A; font-size: 0.9rem;">Building a multi-planetary future for humanity through innovation and courage.</p>
+                </div>
+                <div>
+                    <h3>Navigation</h3>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#mission">Mission Goals</a></li>
+                        <li><a href="#crew">The Crew</a></li>
+                        <li><a href="#tech">Technology</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>Explore</h3>
+                    <ul>
+                        <li><a href="#news">Latest News</a></li>
+                        <li><a href="#gallery">Media Gallery</a></li>
+                        <li><a href="#">Careers</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>Contact</h3>
+                    <ul>
+                        <li><a href="mailto:info@marsmission2040.com">info@marsmission2040.com</a></li>
+                        <li><a href="#">Mission Control Portal</a></li>
+                    </ul>
+                </div>
             </div>
-            <p>&copy; 2026 EcoTech 2035. All rights reserved.</p>
+            <div class="footer-bottom">
+                &copy; 2040 Mars Mission. All Rights Reserved.
+            </div>
         </div>
     </footer>
 
 </body>
 </html>
-
