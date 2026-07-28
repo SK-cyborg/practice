@@ -239,7 +239,7 @@
             border-top: 1px solid var(--color-mars);
             border-bottom: 1px solid var(--color-mars);
             padding: 2rem 0;
-            margin-top: -5px; /* Pull up to bottom of hero */
+            margin-top: -5px;
         }
 
         .stats-grid {
@@ -314,7 +314,6 @@
             overflow: hidden;
         }
 
-        /* Hover Effect for Planet Cards */
         .planet-card::before {
             content: '';
             position: absolute;
@@ -470,6 +469,191 @@
         }
 
         /* =========================================
+           Latest News Section
+           ========================================= */
+        .news-card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .news-card:hover {
+            border-color: var(--color-mars);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+        }
+
+        .news-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .news-date {
+            color: var(--color-mars);
+            font-size: 0.85rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .news-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+            line-height: 1.4;
+        }
+
+        .news-card p {
+            color: #A0AAB5;
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+        }
+
+        .read-more {
+            color: var(--color-white);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: var(--transition);
+            display: inline-block;
+            text-transform: uppercase;
+        }
+
+        .read-more:hover {
+            color: var(--color-mars);
+            letter-spacing: 1px;
+        }
+
+        /* =========================================
+           Media Gallery Section
+           ========================================= */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .gallery-item {
+            border: 1px solid var(--glass-border);
+            border-radius: 8px;
+            height: 250px;
+            transition: var(--transition);
+            cursor: pointer;
+            overflow: hidden;
+            position: relative;
+            background-size: cover !important;
+            background-position: center !important;
+        }
+
+        .gallery-overlay {
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.2) 100%);
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 1.5rem;
+            transition: var(--transition);
+        }
+
+        .gallery-item:hover {
+            border-color: var(--color-mars);
+            transform: scale(1.03);
+            box-shadow: 0 0 20px rgba(229, 89, 52, 0.3);
+            z-index: 2;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            background: linear-gradient(to top, rgba(229, 89, 52, 0.9) 0%, rgba(0, 0, 0, 0.1) 100%);
+        }
+
+        .gallery-item p {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1rem;
+            color: var(--color-white);
+            letter-spacing: 1px;
+            margin: 0;
+            transform: translateY(10px);
+            opacity: 0.8;
+            transition: var(--transition);
+        }
+
+        .gallery-item:hover p {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        /* =========================================
+           Careers Section
+           ========================================= */
+        .job-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .job-item {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 8px;
+            padding: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: var(--transition);
+        }
+
+        .job-item:hover {
+            border-color: var(--color-mars);
+            background: rgba(229, 89, 52, 0.05);
+            transform: translateX(5px);
+        }
+
+        .job-item h3 {
+            font-size: 1.4rem;
+            margin-bottom: 0.5rem;
+            color: var(--color-white);
+        }
+
+        .job-item p {
+            color: #A0AAB5;
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+        }
+
+        .job-tags {
+            display: flex;
+            gap: 0.8rem;
+        }
+
+        .tag {
+            font-size: 0.75rem;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 0.3rem 0.8rem;
+            border-radius: 50px;
+            color: var(--color-white);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .tag.urgent {
+            background: rgba(229, 89, 52, 0.2);
+            color: var(--color-mars);
+            border: 1px solid var(--color-mars);
+        }
+
+        /* =========================================
            Call to Action Section
            ========================================= */
         .cta {
@@ -565,6 +749,15 @@
             .timeline-item.left::after, .timeline-item.right::after { left: 21px; }
             .stats-grid { flex-direction: column; gap: 1.5rem; }
         }
+
+        @media (max-width: 600px) {
+            .job-item {
+                flex-direction: column;
+                text-align: left;
+                align-items: flex-start;
+                gap: 1.5rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -585,7 +778,7 @@
                     <li><a href="#crew">Crew</a></li>
                     <li><a href="#tech">Technology</a></li>
                     <li><a href="#news">News</a></li>
-                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="#careers">Careers</a></li>
                 </ul>
             </nav>
         </div>
@@ -762,6 +955,111 @@
         </div>
     </section>
 
+    <!-- Latest News Section -->
+    <section id="news" class="section-padding">
+        <div class="container">
+            <h2 class="section-title">Latest News</h2>
+            <div class="grid-3">
+                <div class="news-card">
+                    <img src="https://images.unsplash.com/photo-1517976487492-5750f3195933?q=80&w=800&auto=format&fit=crop" alt="Rocket Engine" class="news-image">
+                    <div class="news-date">Jul 12, 2038</div>
+                    <h3>Engine Testing Completes Successfully</h3>
+                    <p>The prototype Plasma Propulsion Engine has completed a 500-hour continuous burn test without any anomalies. This milestone brings us one step closer to cutting travel time to Mars down to just under 5 months.</p>
+                    <a href="#" class="read-more">Read Full Story ➞</a>
+                </div>
+                <div class="news-card">
+                    <img src="https://images.unsplash.com/photo-1614730321146-b6fa6a46bcb4?q=80&w=800&auto=format&fit=crop" alt="Mars Surface" class="news-image">
+                    <div class="news-date">Aug 04, 2038</div>
+                    <h3>New Habitat Materials Pass Radiation Tests</h3>
+                    <p>Our latest 3D-printed regolith composites have proven highly effective at shielding against cosmic radiation. Scientists confirm the material can successfully withstand the extreme atmospheric conditions of the Jezero Crater.</p>
+                    <a href="#" class="read-more">Read Full Story ➞</a>
+                </div>
+                <div class="news-card">
+                    <img src="https://images.unsplash.com/photo-1614728263952-84ea256f9679?q=80&w=800&auto=format&fit=crop" alt="Astronaut" class="news-image">
+                    <div class="news-date">Sep 19, 2038</div>
+                    <h3>Astronaut Selection Phase 2 Begins</h3>
+                    <p>The top 100 candidates from around the globe are now entering the isolation and psychological simulation phase. Over the next six months, they will live in a closed-loop environment mimicking the Mars transit vessel.</p>
+                    <a href="#" class="read-more">Read Full Story ➞</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Media Gallery Section -->
+    <section id="gallery" class="section-padding" style="background: rgba(0,0,0,0.4);">
+        <div class="container">
+            <h2 class="section-title">Media Gallery</h2>
+            <div class="gallery-grid">
+                <div class="gallery-item" style="background: url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=800&auto=format&fit=crop');">
+                    <div class="gallery-overlay">
+                        <p>Habitat Prototype Alpha</p>
+                    </div>
+                </div>
+                <div class="gallery-item" style="background: url('https://images.unsplash.com/photo-1614729939124-03290b56c9ce?q=80&w=800&auto=format&fit=crop');">
+                    <div class="gallery-overlay">
+                        <p>Autonomous Rover Simulation</p>
+                    </div>
+                </div>
+                <div class="gallery-item" style="background: url('https://images.unsplash.com/photo-1541185933-ef5d8ed016c2?q=80&w=800&auto=format&fit=crop');">
+                    <div class="gallery-overlay">
+                        <p>Heavy-Lift Rocket Assembly</p>
+                    </div>
+                </div>
+                <div class="gallery-item" style="background: url('https://images.unsplash.com/photo-1632395627727-4b76a0ce3455?q=80&w=800&auto=format&fit=crop');">
+                    <div class="gallery-overlay">
+                        <p>Martian Topography Scan</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Careers Section -->
+    <section id="careers" class="section-padding">
+        <div class="container">
+            <h2 class="section-title">Careers</h2>
+            <p style="text-align: center; margin-bottom: 4rem; color: #B0B8C1; max-width: 650px; margin-left: auto; margin-right: auto; font-size: 1.1rem;">
+                We are looking for the brightest minds to join our mission. Explore open positions at Mission Control, our global engineering facilities, and orbital training stations.
+            </p>
+            <div class="job-list">
+                <div class="job-item">
+                    <div>
+                        <h3>Aerospace Engineer - Propulsion</h3>
+                        <p>Design and test next-generation thermal nuclear propulsion systems for the transit vehicle.</p>
+                        <div class="job-tags">
+                            <span class="tag urgent">Urgent Hire</span>
+                            <span class="tag">Houston, TX</span>
+                            <span class="tag">Full-Time</span>
+                        </div>
+                    </div>
+                    <a href="#" class="btn btn-outline">Apply Now</a>
+                </div>
+                <div class="job-item">
+                    <div>
+                        <h3>Astrobiologist / Geochemist</h3>
+                        <p>Analyze geological data from current rovers to identify optimal drilling sites for water extraction.</p>
+                        <div class="job-tags">
+                            <span class="tag">Remote</span>
+                            <span class="tag">Contract</span>
+                        </div>
+                    </div>
+                    <a href="#" class="btn btn-outline">Apply Now</a>
+                </div>
+                <div class="job-item">
+                    <div>
+                        <h3>Robotics & Automation Technician</h3>
+                        <p>Maintain and program the autonomous drone fleet responsible for early habitat construction.</p>
+                        <div class="job-tags">
+                            <span class="tag">Munich, Germany</span>
+                            <span class="tag">Full-Time</span>
+                        </div>
+                    </div>
+                    <a href="#" class="btn btn-outline">Apply Now</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Call to Action -->
     <section id="contact" class="cta">
         <div class="container">
@@ -794,7 +1092,7 @@
                     <ul>
                         <li><a href="#news">Latest News</a></li>
                         <li><a href="#gallery">Media Gallery</a></li>
-                        <li><a href="#">Careers</a></li>
+                        <li><a href="#careers">Careers</a></li>
                     </ul>
                 </div>
                 <div>
